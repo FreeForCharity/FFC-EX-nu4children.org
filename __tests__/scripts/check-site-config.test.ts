@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url'
 /**
  * Contract tests for scripts/check-site-config.mjs, the zero-dependency
  * SiteConfig drift guard shared byte-for-byte between
- * FFC-IN-FFC_Single_Page_Template and FFC-IN-Footer_Only_Template.
+ * FFC-IN-FFC_Single_Page_Template and FFC-EX-nu4children.org.
  *
  * The minimal validator is exercised by importing the module in a child
  * node process (the script is ESM and must stay outside the jest/ts

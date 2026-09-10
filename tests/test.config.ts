@@ -18,20 +18,12 @@ export const testConfig = {
    */
   socialLinks: {
     facebook: {
-      url: 'facebook.com/freeforcharity',
+      url: 'facebook.com/nu4children',
       ariaLabel: 'Facebook',
     },
-    twitter: {
-      url: 'x.com/freeforcharity1',
-      ariaLabel: 'X (Twitter)',
-    },
-    linkedin: {
-      url: 'linkedin.com/company/freeforcharity',
-      ariaLabel: 'LinkedIn',
-    },
-    github: {
-      url: 'github.com/FreeForCharity/FFC-IN-Footer_Only_Template',
-      ariaLabel: 'GitHub',
+    instagram: {
+      url: 'instagram.com/nu4children',
+      ariaLabel: 'Instagram',
     },
   },
 
@@ -40,8 +32,10 @@ export const testConfig = {
    * Used in: tests/copyright.spec.ts
    */
   copyright: {
-    text: 'All Rights Are Reserved by Free For Charity a US 501c3 Non Profit',
-    searchText: 'All Rights Are Reserved',
+    // No validated EIN/501(c)(3) status yet, so the footer does not claim
+    // "US 501(c)(3) Non-Profit" status (see src/lib/site.config.ts NOT_YET_AVAILABLE).
+    text: 'All Rights Reserved by Nurses United 4 Children',
+    searchText: 'All Rights Reserved',
     // The permanent "Supported by Free For Charity" attribution (FFC footer
     // standard) — keep these expectations when customizing the template.
     linkUrl: 'https://freeforcharity.org',
@@ -51,6 +45,11 @@ export const testConfig = {
   /**
    * Google Tag Manager Configuration
    * Used in: tests/google-tag-manager.spec.ts
+   *
+   * NOTE: this is still the Free For Charity template's own GTM container.
+   * A dedicated GTM container for Nurses United 4 Children has not yet been
+   * provisioned (see the `analytics-provisioning` skill) — tracked as a
+   * follow-up, not part of this migration.
    */
   googleTagManager: {
     id: 'GTM-TQ5H8HPR',
@@ -61,7 +60,7 @@ export const testConfig = {
    * Used in: tests/footer-only.spec.ts
    */
   logo: {
-    headerAlt: 'Free For Charity',
+    headerAlt: 'Nurses United 4 Children',
   },
 
   /**

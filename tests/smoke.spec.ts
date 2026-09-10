@@ -18,7 +18,7 @@ import { testConfig } from './test.config'
  *
  * Paths are RELATIVE (no leading slash) so Playwright appends them to baseURL.
  * This is critical for GitHub Pages where baseURL includes a basePath prefix
- * (e.g., https://freeforcharity.github.io/FFC-IN-Footer_Only_Template/).
+ * (e.g., https://freeforcharity.github.io/FFC-EX-nu4children.org/).
  * Absolute paths like '/privacy-policy/' would navigate to the domain root instead.
  *
  * Paths use NO trailing slash — GitHub Pages deploys flat HTML files

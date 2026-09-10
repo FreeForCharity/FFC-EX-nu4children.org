@@ -1,6 +1,7 @@
 import {
   canonicalPath,
   cardDescription,
+  NOT_YET_AVAILABLE,
   siteConfig,
   sitePath,
   siteUrl,
@@ -20,41 +21,34 @@ afterEach(() => {
 describe('siteConfig contract', () => {
   it('exposes the full site identity shape used by runtime consumers', () => {
     expect(siteConfig).toMatchObject({
-      name: 'Free For Charity',
-      tagline: 'Reduce Costs, Increase Impact',
-      url: 'https://ffcworkingsite1.org',
-      twitterHandle: '@freeforcharity',
-      contactEmail: 'clarkemoyer@freeforcharity.org',
-      themeColor: '#ffffff',
+      name: 'Nurses United 4 Children',
+      tagline: 'Ending Child Exploitation, Building Brighter Futures',
+      url: 'https://freeforcharity.github.io',
+      // No official Twitter/X account was found on the live site.
+      twitterHandle: '',
+      contactEmail: 'nu4c2020@gmail.com',
       vulnerabilityDisclosurePath: '/vulnerability-disclosure-policy',
     })
-    expect(siteConfig.description).toContain('nonprofits')
-    expect(siteConfig.shortDescription).toContain('nonprofits')
+    expect(siteConfig.description).toContain('non-profit')
+    expect(siteConfig.shortDescription.length).toBeGreaterThan(0)
     expect(siteConfig.keywords).toEqual(
       expect.arrayContaining(['nonprofit', 'charity', 'volunteer'])
     )
-    expect(siteConfig.social.map((link) => link.label)).toEqual([
-      'Facebook',
-      'X (Twitter)',
-      'LinkedIn',
-      'GitHub',
-    ])
-    // Converged shape: these keys must match the FFC Single Page template's
-    // canonical SiteConfig (guidestar.profileUrl / directProfileUrl,
-    // phone.display / phone.tel, addresses[].mapUrl, supportedBy.hubUrl).
-    expect(siteConfig.guidestar.profileUrl).toBe('https://www.guidestar.org/profile/46-2471893')
-    expect(siteConfig.guidestar.directProfileUrl).toBe(
-      'https://www.guidestar.org/profile/shared/bbbe173a-87b9-4af9-a8a2-cae255a95742'
-    )
-    expect(siteConfig.ein).toBe('46-2471893')
-    expect(siteConfig.phone).toEqual({
-      display: '(520) 222-8104',
-      tel: '5202228104',
+    expect(siteConfig.social.map((link) => link.label)).toEqual(['Facebook', 'Instagram'])
+    // No validated EIN or Candid/GuideStar profile exists for this
+    // organization yet — the footer standard (Level 1) requires these to
+    // hold the NOT_YET_AVAILABLE sentinel rather than a guess (the shared
+    // schema requires non-empty strings, so '' is not available here),
+    // which suppresses the 501(c)(3) claim and the Endorsements column
+    // (see Footer.test.tsx).
+    expect(siteConfig.ein).toBe(NOT_YET_AVAILABLE)
+    expect(siteConfig.guidestar).toEqual({
+      profileUrl: NOT_YET_AVAILABLE,
+      directProfileUrl: NOT_YET_AVAILABLE,
     })
-    expect(siteConfig.addresses.map((address) => address.label)).toEqual([
-      'Main Address',
-      'PA Office Address',
-    ])
+    // No phone number was found on the live site.
+    expect(siteConfig.phone).toEqual({ display: NOT_YET_AVAILABLE, tel: NOT_YET_AVAILABLE })
+    expect(siteConfig.addresses.map((address) => address.label)).toEqual(['Address'])
     for (const address of siteConfig.addresses) {
       expect(address.mapUrl).toMatch(/^https:\/\/www\.google\.com\/maps\//)
     }
@@ -77,31 +71,32 @@ describe('siteConfig contract', () => {
     // canonicalPath() owns the trailingSlash policy; siteUrl() applies both.
     expect(canonicalPath('/')).toBe('/')
     expect(canonicalPath('/privacy-policy')).toBe('/privacy-policy/')
-    expect(siteUrl('/')).toBe('https://ffcworkingsite1.org/')
-    expect(siteUrl('/privacy-policy')).toBe('https://ffcworkingsite1.org/privacy-policy/')
+    expect(siteUrl('/')).toBe('https://freeforcharity.github.io/')
+    expect(siteUrl('/privacy-policy')).toBe('https://freeforcharity.github.io/privacy-policy/')
     // Files are served verbatim and must not gain a slash.
-    expect(siteUrl('/sitemap.xml')).toBe('https://ffcworkingsite1.org/sitemap.xml')
+    expect(siteUrl('/sitemap.xml')).toBe('https://freeforcharity.github.io/sitemap.xml')
     expect(() => siteUrl('privacy-policy')).toThrow(TypeError)
     expect(() => siteUrl('//example.com')).toThrow(TypeError)
     expect(() => canonicalPath('//example.com')).toThrow(TypeError)
   })
 
   it('builds same-origin URLs that include the GitHub Pages base path', () => {
-    process.env.NEXT_PUBLIC_BASE_PATH = '/FFC-IN-Footer_Only_Template'
+    process.env.NEXT_PUBLIC_BASE_PATH = '/FFC-EX-nu4children.org'
 
-    expect(sitePath('/')).toBe('/FFC-IN-Footer_Only_Template/')
-    expect(sitePath('/privacy-policy')).toBe('/FFC-IN-Footer_Only_Template/privacy-policy')
-    expect(siteUrl('/')).toBe('https://ffcworkingsite1.org/FFC-IN-Footer_Only_Template/')
+    expect(sitePath('/')).toBe('/FFC-EX-nu4children.org/')
+    expect(sitePath('/privacy-policy')).toBe('/FFC-EX-nu4children.org/privacy-policy')
+    expect(siteUrl('/')).toBe('https://freeforcharity.github.io/FFC-EX-nu4children.org/')
     expect(siteUrl('/privacy-policy')).toBe(
-      'https://ffcworkingsite1.org/FFC-IN-Footer_Only_Template/privacy-policy/'
+      'https://freeforcharity.github.io/FFC-EX-nu4children.org/privacy-policy/'
     )
     expect(siteUrl('/sitemap.xml')).toBe(
-      'https://ffcworkingsite1.org/FFC-IN-Footer_Only_Template/sitemap.xml'
+      'https://freeforcharity.github.io/FFC-EX-nu4children.org/sitemap.xml'
     )
   })
 
   it('normalizes card metadata helpers', () => {
-    expect(twitterSite()).toBe('@freeforcharity')
+    // No Twitter/X handle is configured for this organization.
+    expect(twitterSite()).toBeUndefined()
     expect(cardDescription()).toBe(siteConfig.shortDescription)
   })
 })

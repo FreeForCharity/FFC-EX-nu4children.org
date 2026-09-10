@@ -3,8 +3,8 @@ import { siteUrl } from '@/lib/site.config'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy | Free For Charity',
-  description: 'Cookie Policy for Free For Charity website',
+  title: 'Cookie Policy',
+  description: 'Cookie Policy for the Nurses United 4 Children website',
   // Own canonical: without it Next inherits the layout's, which points at the home page.
   alternates: { canonical: siteUrl('/cookie-policy') },
 }
@@ -527,17 +527,8 @@ export default function CookiePolicy() {
           <ul className="list-inside list-disc space-y-[4px] pb-[1em]">
             <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
               <strong>Email:</strong>{' '}
-              <a href="mailto:privacy@freeforcharity.org" className="text-blue-600 hover:underline">
-                privacy@freeforcharity.org
-              </a>
-            </li>
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Emergency Contact:</strong> Clarke Moyer
-            </li>
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Phone:</strong>{' '}
-              <a href="tel:520-222-8104" className="text-blue-600 hover:underline">
-                520-222-8104
+              <a href="mailto:nu4c2020@gmail.com" className="text-blue-600 hover:underline">
+                nu4c2020@gmail.com
               </a>
             </li>
           </ul>

@@ -16,12 +16,12 @@ const index = () => {
   const bottomRow = team.slice(3)
 
   return (
-    <div id="team" className="py-[50px]">
+    <div id="team" className="pt-[130px] pb-[50px]">
       <h1
         className="font-[400] text-[40px] lg:text-[48px]  tracking-[0] text-center mx-auto mb-[50px]"
         id="faustina-font"
       >
-        The Free For Charity Team
+        Meet Our Team
       </h1>
 
       <div className="w-[90%] mx-auto py-[40px]">

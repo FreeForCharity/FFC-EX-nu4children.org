@@ -30,9 +30,9 @@ describe('Header component', () => {
     expect(screen.getByRole('banner')).toBeInTheDocument()
   })
 
-  it('should display the Free For Charity logo', () => {
+  it('should display the Nurses United 4 Children logo', () => {
     render(<Header />)
-    expect(screen.getByAltText('Free For Charity')).toBeInTheDocument()
+    expect(screen.getByAltText('Nurses United 4 Children')).toBeInTheDocument()
   })
 
   it('should display Home navigation link', () => {
@@ -106,7 +106,7 @@ describe('Header component', () => {
 
   it('should have the logo link to homepage', () => {
     render(<Header />)
-    const logo = screen.getByAltText('Free For Charity')
+    const logo = screen.getByAltText('Nurses United 4 Children')
     const logoLink = logo.closest('a')
     expect(logoLink).toHaveAttribute('href', '/')
   })
@@ -144,39 +144,34 @@ describe('Header component', () => {
     expect(screen.getByLabelText('Open menu')).toBeInTheDocument()
   })
 
-  it('should highlight active section based on scroll spy', () => {
-    // Create a mock team section element
-    const teamSection = document.createElement('div')
-    teamSection.id = 'team'
-    Object.defineProperty(teamSection, 'offsetTop', { value: 200, configurable: true })
-    Object.defineProperty(teamSection, 'offsetHeight', { value: 500, configurable: true })
-    document.body.appendChild(teamSection)
-
+  it('should highlight the current page in the nav based on the pathname', () => {
     render(<Header />)
 
-    // Scroll into the team section
-    Object.defineProperty(window, 'scrollY', { value: 250, writable: true })
-    fireEvent.scroll(window)
-
-    // The Team link should be styled as active (text-blue-600)
-    const teamLinks = screen.getAllByText('Team')
-    const activeTeamLink = teamLinks.find((link) => link.className.includes('text-blue-600'))
-    expect(activeTeamLink).toBeDefined()
-
-    // Clean up
-    document.body.removeChild(teamSection)
-  })
-
-  it('should set Home as active when scrolled to top', () => {
-    render(<Header />)
-
-    // Scroll to top
-    Object.defineProperty(window, 'scrollY', { value: 0, writable: true })
-    fireEvent.scroll(window)
-
-    // Home link should be active
+    // The mocked usePathname() returns '/', so Home should be styled active.
     const homeLinks = screen.getAllByText('Home')
     const activeHomeLink = homeLinks.find((link) => link.className.includes('text-blue-600'))
     expect(activeHomeLink).toBeDefined()
+
+    // A different nav item should not be styled active.
+    const teamLinks = screen.getAllByText('Team')
+    for (const link of teamLinks) {
+      expect(link.className).not.toContain('text-blue-600')
+    }
+  })
+
+  it('should display all expected navigation labels', () => {
+    render(<Header />)
+    for (const item of [
+      'Home',
+      'About Us',
+      'Gala',
+      'Team',
+      'Donate',
+      'Volunteer',
+      'Our Impact',
+      'Contact Us',
+    ]) {
+      expect(screen.getAllByText(item).length).toBeGreaterThanOrEqual(1)
+    }
   })
 })

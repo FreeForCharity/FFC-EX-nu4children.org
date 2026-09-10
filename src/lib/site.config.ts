@@ -110,63 +110,89 @@ export type SiteConfig = {
   parentOrg?: { name: string; url: string; hubUrl: string }
 }
 
+/**
+ * Sentinel for a SiteConfig string field with no validated value yet.
+ *
+ * The shared cross-template schema (schema/site-config.schema.json)
+ * requires `ein`, `phone.display`, `phone.tel`, `guidestar.profileUrl` and
+ * `guidestar.directProfileUrl` to be non-empty strings — so `''` (the
+ * pattern used for an optional `social[].href`) is not available here.
+ * This sentinel satisfies that constraint without asserting a fact we have
+ * not validated. Consumers (Footer) must compare against this constant
+ * rather than truthiness before rendering the value or a link built from
+ * it — see hasValidatedNonprofitStatus and the phone guard below.
+ */
+export const NOT_YET_AVAILABLE = 'Not yet available'
+
 export const siteConfig: SiteConfig = {
-  name: 'Free For Charity',
-  tagline: 'Reduce Costs, Increase Impact',
+  name: 'Nurses United 4 Children',
+  tagline: 'Ending Child Exploitation, Building Brighter Futures',
   description:
-    'Free For Charity connects students, professionals, and businesses with nonprofits to reduce costs and increase revenues—putting more resources back into their missions.',
+    'Nurses United 4 Children is a non-profit organization born after Cayes, Haiti, a poverty-stricken town where children are traded for goods and favors. We work to end child exploitation by keeping children who have been human trafficked and/or are underprivileged in school, offering nutritious meals, and fostering self-sufficiency through after-school initiatives.',
   shortDescription:
-    'Connecting students, professionals, and businesses with nonprofits to reduce costs and increase revenues.',
-  url: 'https://ffcworkingsite1.org',
-  twitterHandle: '@freeforcharity',
-  contactEmail: 'clarkemoyer@freeforcharity.org',
+    'A non-profit keeping trafficked and underprivileged children in school, fed, and supported through after-school initiatives.',
+  // No custom domain is configured yet (this migration phase serves the
+  // default GitHub Pages URL — see public/CNAME, intentionally absent).
+  // Bare origin ONLY: the GitHub Pages subpath (/FFC-EX-nu4children.org) is
+  // supplied separately by NEXT_PUBLIC_BASE_PATH (see deploy.yml, which
+  // derives it from public/CNAME's absence) via sitePath()/assetPath() — do
+  // NOT include the repo path here, or every siteUrl() call doubles it.
+  // Update this to https://nu4children.org once the custom-domain cutover
+  // (public/CNAME) lands — that is a separately gated step.
+  url: 'https://freeforcharity.github.io',
+  // No official X/Twitter account was found on the live site.
+  twitterHandle: '',
+  contactEmail: 'nu4c2020@gmail.com',
   keywords: [
     'nonprofit',
     'charity',
+    'child trafficking prevention',
+    'Haiti',
+    'Fort Lauderdale',
     'volunteer',
     'donate',
-    'free hosting',
-    'domains',
-    'Microsoft 365',
+    'children in need',
   ],
-  themeColor: '#ffffff',
+  themeColor: '#ff2525',
   vulnerabilityDisclosurePath: '/vulnerability-disclosure-policy',
   social: [
-    { label: 'Facebook', href: 'https://www.facebook.com/freeforcharity' },
-    { label: 'X (Twitter)', href: 'https://x.com/freeforcharity1' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/freeforcharity/' },
-    // Repo name uses underscores — the hyphenated variant 404s.
-    { label: 'GitHub', href: 'https://github.com/FreeForCharity/FFC-IN-Footer_Only_Template' },
+    { label: 'Facebook', href: 'https://www.facebook.com/nu4children' },
+    { label: 'Instagram', href: 'https://www.instagram.com/nu4children' },
   ],
-  ein: '46-2471893',
-  phone: { display: '(520) 222-8104', tel: '5202228104' },
+  // No EIN / 501(c)(3) status could be found or validated on the live site.
+  // The footer treats the literal below (== NOT_YET_AVAILABLE, exported
+  // above) as "do not claim 501(c)(3) status" (FFC footer standard, Level
+  // 1). Do not fill this in without a validated source.
+  //
+  // Written as the literal string, NOT the NOT_YET_AVAILABLE identifier:
+  // scripts/check-site-config.mjs statically extracts this object literal
+  // and evaluates it without resolving imports/identifiers ("must be plain
+  // data"), so referencing the constant here breaks that check. Keep this
+  // string identical to NOT_YET_AVAILABLE above — a mismatch only breaks
+  // the Level 1/2 gate silently, so __tests__/lib/site.config.test.ts
+  // asserts they're equal.
+  ein: 'Not yet available',
+  // No phone number was found on the live site.
+  phone: { display: 'Not yet available', tel: 'Not yet available' },
   addresses: [
     {
-      label: 'Main Address',
-      lines: ['4030 Wake Forrest Road', 'Suite 349 Raleigh North', 'Carolina 27609'],
-      mapUrl:
-        'https://www.google.com/maps/search/?api=1&query=4030+Wake+Forrest+Road+Suite+349+Raleigh+NC+27609',
-    },
-    {
-      label: 'PA Office Address',
-      lines: ['301 Science Park Road Suite', '119 State College PA 16803'],
-      mapUrl:
-        'https://www.google.com/maps/place/Free+For+Charity/@40.7768455,-77.8963305,17z/data=!3m1!4b1!4m6!3m5!1s0x89cea944b44a2e01:0x6fc2d6bf09e00a0f!8m2!3d40.7768415!4d-77.8937556!16s%2Fg%2F11vzvbl2d7?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D',
+      label: 'Address',
+      lines: ['Fort Lauderdale, FL'],
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fort+Lauderdale%2C+FL',
     },
   ],
+  // No validated Candid/GuideStar profile exists for this organization yet.
   guidestar: {
-    profileUrl: 'https://www.guidestar.org/profile/46-2471893',
-    directProfileUrl:
-      'https://www.guidestar.org/profile/shared/bbbe173a-87b9-4af9-a8a2-cae255a95742',
+    profileUrl: 'Not yet available',
+    directProfileUrl: 'Not yet available',
   },
   supportedBy: {
     name: 'Free For Charity',
     url: 'https://freeforcharity.org',
     hubUrl: 'https://freeforcharity.org/hub/',
   },
-  // parentOrg is intentionally unset: this template is for standalone
-  // charities by default. Set it only for a genuine "a project of"
-  // fiscal-sponsorship relationship.
+  // parentOrg is intentionally unset: Nurses United 4 Children is a
+  // standalone charity, not a fiscal-sponsorship project of another org.
 }
 
 function configuredBasePath(): string {

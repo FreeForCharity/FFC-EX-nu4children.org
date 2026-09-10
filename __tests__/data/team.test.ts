@@ -1,8 +1,8 @@
 import { team } from '../../src/data/team'
 
 describe('Team data integrity', () => {
-  it('should have exactly 5 team members', () => {
-    expect(team).toHaveLength(5)
+  it('should have exactly 7 team members', () => {
+    expect(team).toHaveLength(7)
   })
 
   it.each(team)('team member "$name" should have required fields', (member) => {
@@ -33,10 +33,12 @@ describe('Team data integrity', () => {
 
   it('should contain expected team members', () => {
     const names = team.map((m) => m.name)
-    expect(names).toContain('Clarke Moyer')
-    expect(names).toContain('Chris Rae')
-    expect(names).toContain('Tyler Carlotto')
-    expect(names).toContain('Brennan Darling')
-    expect(names).toContain('Rebecca Cook')
+    expect(names).toContain('Sandra Louissaint')
+    expect(names).toContain('Pascale Valbrune')
+    expect(names).toContain('Frantz Richard')
+    expect(names).toContain('Maguy Julmice')
+    expect(names).toContain('Rozeline Simonis')
+    expect(names).toContain('Mirta Antoine')
+    expect(names).toContain('Jenny Eugene')
   })
 })
