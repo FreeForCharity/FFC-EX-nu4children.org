@@ -102,7 +102,7 @@ const HomePage = () => {
             What We Offer
           </h2>
           <p className="text-center text-[16px] mb-12 lato-font">
-            Checkout different range of our services.
+            Check out the range of our services.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {offerings.map((item) => (

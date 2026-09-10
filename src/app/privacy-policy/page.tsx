@@ -31,10 +31,10 @@ export default function PrivacyPolicy() {
             </li>
           </ol>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            At Nurses United 4 Children, accessible from https://nu4children.org, your privacy is
-            one of our primary concerns. This Privacy Policy document contains types of information
-            we collect and record, and how we use it. By using our website, you hereby consent to
-            our Privacy Policy and agree to its terms.
+            At Nurses United 4 Children, accessible from {siteUrl('/')}, your privacy is one of our
+            primary concerns. This Privacy Policy document contains types of information we collect
+            and record, and how we use it. By using our website, you hereby consent to our Privacy
+            Policy and agree to its terms.
           </p>
 
           {/* Section 2 */}
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
             </li>
           </ol>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            Our website address is: https://nu4children.org
+            Our website address is: {siteUrl('/')}
           </p>
 
           {/* Section 3 */}
