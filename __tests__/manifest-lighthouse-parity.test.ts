@@ -51,20 +51,20 @@ describe('manifest and Lighthouse parity', () => {
   })
 
   test('prefixes manifest paths with NEXT_PUBLIC_BASE_PATH for GitHub Pages deploys', () => {
-    process.env.NEXT_PUBLIC_BASE_PATH = '/FFC-IN-Footer_Only_Template'
+    process.env.NEXT_PUBLIC_BASE_PATH = '/FFC-EX-nu4children.org'
 
     const generated = manifest()
 
-    expect(generated.start_url).toBe('/FFC-IN-Footer_Only_Template/')
-    expect(generated.scope).toBe('/FFC-IN-Footer_Only_Template/')
+    expect(generated.start_url).toBe('/FFC-EX-nu4children.org/')
+    expect(generated.scope).toBe('/FFC-EX-nu4children.org/')
     expect(generated.icons?.map((icon) => icon.src)).toEqual([
-      '/FFC-IN-Footer_Only_Template/android-chrome-192x192.png',
-      '/FFC-IN-Footer_Only_Template/android-chrome-512x512.png',
+      '/FFC-EX-nu4children.org/android-chrome-192x192.png',
+      '/FFC-EX-nu4children.org/android-chrome-512x512.png',
     ])
 
     jest.resetModules()
     const { siteMetadata } = require('@/lib/siteMetadata')
-    expect(siteMetadata.manifest).toBe('/FFC-IN-Footer_Only_Template/manifest.webmanifest')
+    expect(siteMetadata.manifest).toBe('/FFC-EX-nu4children.org/manifest.webmanifest')
   })
 
   test('Lighthouse workflow derives basePath instead of hard-coding this repository', () => {
@@ -79,7 +79,7 @@ describe('manifest and Lighthouse parity', () => {
     expect(workflow).toContain('.ci.collect.staticDistDir = "./.lighthouseci-dist"')
     expect(workflow).toContain('jq --arg base_path')
     expect(workflow).toContain('http://localhost" + $base_path')
-    expect(workflow).not.toContain('NEXT_PUBLIC_BASE_PATH: /FFC-IN-Footer_Only_Template')
+    expect(workflow).not.toContain('NEXT_PUBLIC_BASE_PATH: /FFC-EX-nu4children.org')
   })
 
   test('Lighthouse audits the same parity pages as the full template', () => {

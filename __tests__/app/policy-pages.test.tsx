@@ -35,9 +35,16 @@ describe('Policy page metadata', () => {
     expect((meta.description as string).length).toBeGreaterThan(0)
   })
 
-  it.each(pages)('$name title should contain Free For Charity', ({ meta }) => {
-    expect(meta.title).toContain('Free For Charity')
-  })
+  it.each(pages)(
+    '$name title is the bare page name (layout template supplies the brand)',
+    ({ meta, name }) => {
+      // Per the rebrand skill: a policy page's own title must NOT double-brand
+      // with "| Nurses United 4 Children" — the root layout's title template
+      // already appends it.
+      expect(meta.title).toBe(name)
+      expect(meta.title).not.toContain('|')
+    }
+  )
 })
 
 describe('Policy page rendering', () => {
@@ -52,10 +59,10 @@ describe('Policy page rendering', () => {
     }
   )
 
-  it('Donation Policy renders heading and EIN', () => {
+  it('Donation Policy renders heading and does not claim an EIN we have not validated', () => {
     render(<DonationPolicyPage />)
     expect(screen.getByText('Donation Policy')).toBeInTheDocument()
-    expect(screen.getByText(/46-2471893/)).toBeInTheDocument()
+    expect(screen.queryByText(/\d{2}-\d{7}/)).not.toBeInTheDocument()
   })
 
   it('Donation Policy contains expected sections', () => {
@@ -67,8 +74,8 @@ describe('Policy page rendering', () => {
 
   it('Donation Policy has a contact email link', () => {
     render(<DonationPolicyPage />)
-    const emailLink = screen.getByText('clarkemoyer@freeforcharity.org')
-    expect(emailLink.closest('a')).toHaveAttribute('href', 'mailto:clarkemoyer@freeforcharity.org')
+    const emailLink = screen.getByText('nu4c2020@gmail.com')
+    expect(emailLink.closest('a')).toHaveAttribute('href', 'mailto:nu4c2020@gmail.com')
   })
 
   it('Security Acknowledgements renders heading', () => {

@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { siteUrl } from '@/lib/site.config'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Free For Charity',
-  description: 'Privacy Policy for Free For Charity website',
+  title: 'Privacy Policy',
+  description: 'Privacy Policy for the Nurses United 4 Children website',
   // Own canonical: without it Next inherits the layout's, which points at the home page.
   alternates: { canonical: siteUrl('/privacy-policy') },
 }
@@ -31,10 +31,10 @@ export default function PrivacyPolicy() {
             </li>
           </ol>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            At Free for Charity, accessible from https://freeforcharity.org, your privacy is one of
-            our primary concerns. This Privacy Policy document contains types of information we
-            collect and record, and how we use it. By using our website, you hereby consent to our
-            Privacy Policy and agree to its terms.
+            At Nurses United 4 Children, accessible from https://nu4children.org, your privacy is
+            one of our primary concerns. This Privacy Policy document contains types of information
+            we collect and record, and how we use it. By using our website, you hereby consent to
+            our Privacy Policy and agree to its terms.
           </p>
 
           {/* Section 2 */}
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
             </li>
           </ol>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            Our website address is: https://freeforcharity.org
+            Our website address is: https://nu4children.org
           </p>
 
           {/* Section 3 */}
@@ -139,39 +139,14 @@ export default function PrivacyPolicy() {
           </ul>
 
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500] mt-[1em]">
-            <strong>3.4. Microsoft Forms - Application Forms</strong>
+            <strong>3.4. Donation Processing</strong>
           </p>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            We use Microsoft Forms (forms.office.com) for our charity application process. When you
-            submit an application through our website:
+            Donations made through this website are processed by our third-party payment partners,
+            Donorbox and Stripe. Information you provide during a donation (name, email, payment
+            details) is handled according to their respective privacy policies, not stored by us
+            directly.
           </p>
-          <ul className="list-inside list-disc space-y-[4px] pb-[1em]">
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Data Collected:</strong> Information you provide in the application form
-              (name, email, organization details, etc.)
-            </li>
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Third-Party Processing:</strong> Microsoft Forms is a service provided by
-              Microsoft Corporation. Your form submissions are processed according to
-              Microsoft&apos;s privacy policies.
-            </li>
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Additional Third-Party Services:</strong> Microsoft Forms may use additional
-              services (including HubSpot) for form analytics and feedback collection. These are
-              controlled by Microsoft, not Free For Charity.
-            </li>
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Privacy Policy:</strong> Review Microsoft&apos;s privacy practices at{' '}
-              <a
-                href="https://privacy.microsoft.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#007bff] underline"
-              >
-                https://privacy.microsoft.com/
-              </a>
-            </li>
-          </ul>
 
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500] mt-[1em]">
             <strong>3.5. Embedded Content from Other Websites</strong>
@@ -326,7 +301,7 @@ export default function PrivacyPolicy() {
             </li>
           </ul>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            To exercise these rights, please contact us at 520-222-8104.
+            To exercise these rights, please contact us at nu4c2020@gmail.com.
           </p>
 
           {/* Section 8 */}
@@ -389,13 +364,12 @@ export default function PrivacyPolicy() {
           </p>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
             <strong>Exercising your rights and complaints.</strong> Contact us at{' '}
-            <a href="mailto:clarkemoyer@freeforcharity.org" className="text-[#007bff] underline">
-              clarkemoyer@freeforcharity.org
+            <a href="mailto:nu4c2020@gmail.com" className="text-[#007bff] underline">
+              nu4c2020@gmail.com
             </a>{' '}
-            or 520-222-8104 to exercise any of these rights; we will respond within the time limits
-            the GDPR sets. You also have the right to lodge a complaint with your national data
-            protection supervisory authority (in the UK, the Information Commissioner&apos;s
-            Office).
+            to exercise any of these rights; we will respond within the time limits the GDPR sets.
+            You also have the right to lodge a complaint with your national data protection
+            supervisory authority (in the UK, the Information Commissioner&apos;s Office).
           </p>
 
           {/* Section 9 */}
@@ -412,13 +386,13 @@ export default function PrivacyPolicy() {
             supplements the rest of this policy.
           </p>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            <strong>We do not sell or share your personal information.</strong> Free For Charity
-            does not sell personal information, and does not share it for cross-context behavioral
-            advertising, as those terms are defined by California law — and has not done so in the
-            preceding 12 months. We do not knowingly collect or sell the personal information of
-            anyone under 16. We do not collect sensitive personal information beyond what is
-            necessary to provide this website and our services, and we do not use it to infer
-            characteristics about you.
+            <strong>We do not sell or share your personal information.</strong> Nurses United 4
+            Children does not sell personal information, and does not share it for cross-context
+            behavioral advertising, as those terms are defined by California law — and has not done
+            so in the preceding 12 months. We do not knowingly collect or sell the personal
+            information of anyone under 16. We do not collect sensitive personal information beyond
+            what is necessary to provide this website and our services, and we do not use it to
+            infer characteristics about you.
           </p>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
             <strong>Your rights.</strong> You have the right to: know what personal information we
@@ -441,12 +415,12 @@ export default function PrivacyPolicy() {
           </p>
           <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
             <strong>Exercising your rights.</strong> Submit a request to{' '}
-            <a href="mailto:clarkemoyer@freeforcharity.org" className="text-[#007bff] underline">
-              clarkemoyer@freeforcharity.org
-            </a>{' '}
-            or 520-222-8104. We will verify your request using information associated with your
-            interactions with us, and you may use an authorized agent to submit a request on your
-            behalf. We will respond within the timeframes California law requires.
+            <a href="mailto:nu4c2020@gmail.com" className="text-[#007bff] underline">
+              nu4c2020@gmail.com
+            </a>
+            . We will verify your request using information associated with your interactions with
+            us, and you may use an authorized agent to submit a request on your behalf. We will
+            respond within the timeframes California law requires.
           </p>
 
           {/* Section 10 */}
@@ -580,36 +554,9 @@ export default function PrivacyPolicy() {
           <ul className="list-inside list-disc space-y-[4px] pb-[1em]">
             <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
               <strong>Email:</strong>{' '}
-              <a href="mailto:clarkemoyer@freeforcharity.org" className="text-[#007bff] underline">
-                clarkemoyer@freeforcharity.org
-              </a>{' '}
-              520-222-8104
-            </li>
-          </ul>
-
-          {/* Section 16 */}
-          <ol className="list-decimal list-inside pb-[1em]" start={16}>
-            <li>
-              <h2 className="text-[26px] leading-[26px] font-[700] text-[#333] mb-[10px]">
-                <strong>Additional Information</strong>
-              </h2>
-            </li>
-          </ol>
-
-          <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            <strong>16.1. Data Protection Officer</strong>
-          </p>
-          <p className="text-[14px] text-[#666] pb-[10px] leading-[24px] font-[500]">
-            We have appointed a Data Protection Officer (DPO) responsible for overseeing questions
-            in relation to this Privacy Policy:
-          </p>
-          <ul className="list-inside list-disc space-y-[4px] pb-[1em]">
-            <li className="text-[14px] text-[#666] leading-[24px] font-[500]">
-              <strong>Contact DPO:</strong> Clarke Moyer{' '}
-              <a href="mailto:clarkemoyer@freeforcharity.org" className="text-[#007bff] underline">
-                clarkemoyer@freeforcharity.org
-              </a>{' '}
-              520-222-8104
+              <a href="mailto:nu4c2020@gmail.com" className="text-[#007bff] underline">
+                nu4c2020@gmail.com
+              </a>
             </li>
           </ul>
 
