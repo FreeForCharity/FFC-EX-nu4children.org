@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { siteConfig } from '../src/lib/site.config'
 
@@ -51,26 +51,48 @@ describe('deployable security artifacts', () => {
     expect(payload(rootCopy)).toBe(wellKnownPayload)
     expect(wellKnownPayload).toContain(`Contact: mailto:${siteConfig.contactEmail}`)
     expect(wellKnownPayload).toContain('Preferred-Languages: en')
-    expect(wellKnownPayload).toContain(`Canonical: ${siteConfig.url}/.well-known/security.txt`)
-    expect(wellKnownPayload).toContain(`Canonical: ${siteConfig.url}/security.txt`)
-    expect(wellKnownPayload).toContain(
-      `Canonical: ${siteConfig.url}/FFC-EX-nu4children.org/.well-known/security.txt`
-    )
-    expect(wellKnownPayload).toContain(
-      `Canonical: ${siteConfig.url}/FFC-EX-nu4children.org/security.txt`
-    )
-    expect(wellKnownPayload).toContain(
-      `Policy: ${siteConfig.url}${siteConfig.vulnerabilityDisclosurePath}`
-    )
-    expect(wellKnownPayload).toContain(
-      `Policy: ${siteConfig.url}/FFC-EX-nu4children.org${siteConfig.vulnerabilityDisclosurePath}`
-    )
-    expect(wellKnownPayload).toContain(
-      `Acknowledgments: ${siteConfig.url}/security-acknowledgements`
-    )
-    expect(wellKnownPayload).toContain(
-      `Acknowledgments: ${siteConfig.url}/FFC-EX-nu4children.org/security-acknowledgements`
-    )
+
+    // Which URL shape is correct is mutually exclusive and driven by
+    // public/CNAME, exactly like scripts/check-drift.mjs's
+    // checkSecurityTxtSync: no CNAME → siteConfig.url is the *shared*
+    // freeforcharity.github.io origin, so only the project-path lines are
+    // real (a bare-origin line would misdirect a reporter to FFC's org
+    // homepage); CNAME present → the build serves this site at that
+    // origin's root, so only the bare-origin lines are real. Branching here
+    // means this test stays correct across the eventual custom-domain
+    // cutover instead of needing a manual update alongside it.
+    //
+    // Matches checkSecurityTxtSync's fs.stat().size > 0 exactly (mirroring
+    // deploy.yml's `[ -s "public/CNAME" ]`) rather than mere existence, so a
+    // present-but-empty (0-byte) CNAME is NOT treated as configured here —
+    // existsSync() alone would flip the expected URL shape for that file
+    // while check-drift.mjs and the real deploy both still expect the
+    // project-path lines.
+    let cnameSize = 0
+    try {
+      cnameSize = statSync(join(root, 'public/CNAME')).size
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
+    }
+    const hasCname = cnameSize > 0
+    const projectPathLines = [
+      `Canonical: ${siteConfig.url}/FFC-EX-nu4children.org/.well-known/security.txt`,
+      `Canonical: ${siteConfig.url}/FFC-EX-nu4children.org/security.txt`,
+      `Policy: ${siteConfig.url}/FFC-EX-nu4children.org${siteConfig.vulnerabilityDisclosurePath}`,
+      `Acknowledgments: ${siteConfig.url}/FFC-EX-nu4children.org/security-acknowledgements`,
+    ]
+    const rootLines = [
+      `Canonical: ${siteConfig.url}/.well-known/security.txt`,
+      `Canonical: ${siteConfig.url}/security.txt`,
+      `Policy: ${siteConfig.url}${siteConfig.vulnerabilityDisclosurePath}`,
+      `Acknowledgments: ${siteConfig.url}/security-acknowledgements`,
+    ]
+    const [correctLines, misdirectingLines] = hasCname
+      ? [rootLines, projectPathLines]
+      : [projectPathLines, rootLines]
+
+    for (const line of correctLines) expect(wellKnownPayload).toContain(line)
+    for (const line of misdirectingLines) expect(wellKnownPayload).not.toContain(line)
 
     const expires = wellKnownPayload.match(/^Expires:\s*(.+)$/m)?.[1]
     expect(expires).toBeDefined()
