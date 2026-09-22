@@ -64,7 +64,7 @@ describe('sitemap.xml generation', () => {
     delete process.env.NEXT_PUBLIC_BASE_PATH
     const result = sitemap()
     for (const entry of result) {
-      expect(entry.url).toContain('freeforcharity.github.io')
+      expect(entry.url).toContain('nu4children.org')
     }
   })
 
@@ -123,7 +123,7 @@ describe('sitemap URL shape matches the trailingSlash config', () => {
       expect(entry.url.endsWith('/')).toBe(canonicalPath(routes[index].path).endsWith('/'))
       // Belt and braces: siteUrl() is what we are asserting about, so also
       // check the raw string against the configured origin + served path.
-      expect(entry.url).toBe(`https://freeforcharity.github.io${canonicalPath(routes[index].path)}`)
+      expect(entry.url).toBe(`https://nu4children.org${canonicalPath(routes[index].path)}`)
     })
   })
 
@@ -132,7 +132,7 @@ describe('sitemap URL shape matches the trailingSlash config', () => {
 
     const [root] = sitemap()
 
-    expect(root.url).toBe('https://freeforcharity.github.io/')
+    expect(root.url).toBe('https://nu4children.org/')
     expect(root.url.endsWith('//')).toBe(false)
   })
 
@@ -142,10 +142,8 @@ describe('sitemap URL shape matches the trailingSlash config', () => {
     const result = sitemap()
     const urls = result.map((entry) => entry.url)
 
-    expect(urls[0]).toBe('https://freeforcharity.github.io/FFC-EX-nu4children.org/')
-    expect(urls).toContain(
-      'https://freeforcharity.github.io/FFC-EX-nu4children.org/privacy-policy/'
-    )
+    expect(urls[0]).toBe('https://nu4children.org/FFC-EX-nu4children.org/')
+    expect(urls).toContain('https://nu4children.org/FFC-EX-nu4children.org/privacy-policy/')
     for (const url of urls) {
       expect(url.endsWith('/')).toBe(trailingSlash)
       expect(url).not.toMatch(/\/\/$/)
