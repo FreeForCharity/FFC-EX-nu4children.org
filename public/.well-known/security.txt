@@ -1,22 +1,21 @@
-# RFC 9116 security.txt for Nurses United 4 Children (freeforcharity.github.io/FFC-EX-nu4children.org).
+# RFC 9116 security.txt for Nurses United 4 Children (nu4children.org).
 # Keep Contact, Policy, Acknowledgments, and Canonical URLs aligned with
 # src/lib/site.config.ts.
 #
 # Expires must be a future RFC 3339 datetime. The included GitHub Action opens
 # an issue when the date gets close.
 #
-# Project-site Canonical lines include the GitHub Pages base path this site is
-# actually served under (no custom domain / public/CNAME yet). Root
-# (no-base-path) lines are deliberately omitted until a custom domain exists —
-# this repo currently shares the freeforcharity.github.io origin with every
-# other FFC site, so a bare-origin line would point a reporter at FFC's org
-# homepage, not this site. The drift checker enforces this and matching
-# payloads between the two copies.
+# Root (no-base-path) Canonical lines are correct now that public/CNAME
+# configures a custom domain: deploy.yml switches to an empty basePath and
+# serves this site at nu4children.org's own root, so the project-path shape
+# (freeforcharity.github.io/FFC-EX-nu4children.org/...) would misdirect a
+# reporter once that build ships. The drift checker enforces this and
+# matching payloads between the two copies.
 
 Contact: mailto:nu4c2020@gmail.com
 Expires: 2027-12-31T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://freeforcharity.github.io/FFC-EX-nu4children.org/.well-known/security.txt
-Canonical: https://freeforcharity.github.io/FFC-EX-nu4children.org/security.txt
-Policy: https://freeforcharity.github.io/FFC-EX-nu4children.org/vulnerability-disclosure-policy
-Acknowledgments: https://freeforcharity.github.io/FFC-EX-nu4children.org/security-acknowledgements
+Canonical: https://nu4children.org/.well-known/security.txt
+Canonical: https://nu4children.org/security.txt
+Policy: https://nu4children.org/vulnerability-disclosure-policy
+Acknowledgments: https://nu4children.org/security-acknowledgements

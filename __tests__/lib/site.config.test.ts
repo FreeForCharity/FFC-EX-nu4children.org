@@ -23,7 +23,7 @@ describe('siteConfig contract', () => {
     expect(siteConfig).toMatchObject({
       name: 'Nurses United 4 Children',
       tagline: 'Ending Child Exploitation, Building Brighter Futures',
-      url: 'https://freeforcharity.github.io',
+      url: 'https://nu4children.org',
       // No official Twitter/X account was found on the live site.
       twitterHandle: '',
       contactEmail: 'nu4c2020@gmail.com',
@@ -71,10 +71,10 @@ describe('siteConfig contract', () => {
     // canonicalPath() owns the trailingSlash policy; siteUrl() applies both.
     expect(canonicalPath('/')).toBe('/')
     expect(canonicalPath('/privacy-policy')).toBe('/privacy-policy/')
-    expect(siteUrl('/')).toBe('https://freeforcharity.github.io/')
-    expect(siteUrl('/privacy-policy')).toBe('https://freeforcharity.github.io/privacy-policy/')
+    expect(siteUrl('/')).toBe('https://nu4children.org/')
+    expect(siteUrl('/privacy-policy')).toBe('https://nu4children.org/privacy-policy/')
     // Files are served verbatim and must not gain a slash.
-    expect(siteUrl('/sitemap.xml')).toBe('https://freeforcharity.github.io/sitemap.xml')
+    expect(siteUrl('/sitemap.xml')).toBe('https://nu4children.org/sitemap.xml')
     expect(() => siteUrl('privacy-policy')).toThrow(TypeError)
     expect(() => siteUrl('//example.com')).toThrow(TypeError)
     expect(() => canonicalPath('//example.com')).toThrow(TypeError)
@@ -85,12 +85,12 @@ describe('siteConfig contract', () => {
 
     expect(sitePath('/')).toBe('/FFC-EX-nu4children.org/')
     expect(sitePath('/privacy-policy')).toBe('/FFC-EX-nu4children.org/privacy-policy')
-    expect(siteUrl('/')).toBe('https://freeforcharity.github.io/FFC-EX-nu4children.org/')
+    expect(siteUrl('/')).toBe('https://nu4children.org/FFC-EX-nu4children.org/')
     expect(siteUrl('/privacy-policy')).toBe(
-      'https://freeforcharity.github.io/FFC-EX-nu4children.org/privacy-policy/'
+      'https://nu4children.org/FFC-EX-nu4children.org/privacy-policy/'
     )
     expect(siteUrl('/sitemap.xml')).toBe(
-      'https://freeforcharity.github.io/FFC-EX-nu4children.org/sitemap.xml'
+      'https://nu4children.org/FFC-EX-nu4children.org/sitemap.xml'
     )
   })
 
