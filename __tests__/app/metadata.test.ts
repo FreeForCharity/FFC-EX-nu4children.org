@@ -2,7 +2,7 @@ import { siteMetadata } from '../../src/lib/siteMetadata'
 
 describe('Site metadata', () => {
   it('should have the correct metadataBase URL', () => {
-    expect(siteMetadata.metadataBase?.toString()).toBe('https://freeforcharity.github.io/')
+    expect(siteMetadata.metadataBase?.toString()).toBe('https://nu4children.org/')
   })
 
   it('should have a title containing the organization name', () => {
@@ -27,7 +27,7 @@ describe('Site metadata', () => {
     const og = siteMetadata.openGraph as Record<string, unknown>
     expect(og.type).toBe('website')
     expect(og.siteName).toBe('Nurses United 4 Children')
-    expect(og.url).toBe('https://freeforcharity.github.io/')
+    expect(og.url).toBe('https://nu4children.org/')
     expect(og.images).toBeDefined()
   })
 

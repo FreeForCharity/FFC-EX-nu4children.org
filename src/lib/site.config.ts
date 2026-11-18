@@ -131,15 +131,13 @@ export const siteConfig: SiteConfig = {
     'Nurses United 4 Children is a non-profit organization born after Cayes, Haiti, a poverty-stricken town where children are traded for goods and favors. We work to end child exploitation by keeping children who have been human trafficked and/or are underprivileged in school, offering nutritious meals, and fostering self-sufficiency through after-school initiatives.',
   shortDescription:
     'A non-profit keeping trafficked and underprivileged children in school, fed, and supported through after-school initiatives.',
-  // No custom domain is configured yet (this migration phase serves the
-  // default GitHub Pages URL — see public/CNAME, intentionally absent).
-  // Bare origin ONLY: the GitHub Pages subpath (/FFC-EX-nu4children.org) is
-  // supplied separately by NEXT_PUBLIC_BASE_PATH (see deploy.yml, which
-  // derives it from public/CNAME's absence) via sitePath()/assetPath() — do
-  // NOT include the repo path here, or every siteUrl() call doubles it.
-  // Update this to https://nu4children.org once the custom-domain cutover
-  // (public/CNAME) lands — that is a separately gated step.
-  url: 'https://freeforcharity.github.io',
+  // Custom-domain cutover staged: public/CNAME now carries nu4children.org,
+  // so this must move with it (same drift check enforces both together).
+  // Bare origin ONLY: do NOT include a repo path here, or every siteUrl()
+  // call doubles it. This PR is held open (not merged) — see the CNAME
+  // file's own commit message — so this value ships live only once a
+  // human merges the staged cutover.
+  url: 'https://nu4children.org',
   // No official X/Twitter account was found on the live site.
   twitterHandle: '',
   contactEmail: 'nu4c2020@gmail.com',
